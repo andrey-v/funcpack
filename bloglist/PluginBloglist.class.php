@@ -38,7 +38,6 @@ class PluginBloglist extends Plugin {
      * @return bool
      */
     public function Activate() {
-
         return TRUE;
     }
 
@@ -54,9 +53,8 @@ class PluginBloglist extends Plugin {
      * Инициализация плагина
      */
     public function Init() {
-        echo "world";
-        $this->Viewer_Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
-        $this->Viewer_AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
-        $this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__) . "js/script.js"); // Добавление JS
+        P::modules()->viewer->Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
+        P::modules()->viewer->AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
+        P::modules()->viewer->AppendScript(Plugin::GetTemplatePath(__CLASS__) . "js/script.js");
     }
 }

@@ -9,6 +9,9 @@
  * @version     0.1 от 05.10.13 09:51
  */
 
+// Путь к экшену отображения списка топиков блога
+Config::Set('router.page.bloglist', 'PluginBloglist_ActionBloglist');
+
 return array(
 
     // Использовать ли прокси-методы

@@ -10,19 +10,19 @@
  */
 class PluginBloglist_HookMain extends Hook {
 
-//    use AdvancedPlugin;
+    use AdvancedHook;
 
     /**
      * Регистрация хуков
      */
     public function RegisterHook() {
         // Добавление ссылки на содержание блога в меню блога
-        $this->AddHook('menu_blog_blog_item', 'blogMenu');
+        $this->AddHook('template_menu_blog_blog_item', 'blogMenu');
     }
 
     public final function blogMenu() {
         // Вернем ссылку на содержание блога
-//        return $this->Viewer_Fetch(Plugin::GetTemplatePath(__CLASS__) . 'menu.admin.tpl');
+        return P::modules()->viewer->Fetch(Plugin::GetTemplatePath(__CLASS__) . 'menu.blog.tpl');
     }
 
 }
