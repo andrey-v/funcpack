@@ -12,27 +12,47 @@
 /**
  * Свойство, предоставляющее доступ к модулям CMS
  *
- * * * * * Следующие магические свойства указаны для обеспечения автокомплита * * * *
- * @property ModuleACL       acl
- * @property ModuleAdmin     admin
- * @property ModuleBlog      blog
- * @property ModuleComment   comment
- * @property ModuleFavourite favourite
- * @property ModuleGeo       geo
- * @property ModuleNotify    notify
- * @property ModulePage      page
- * @property ModuleSearch    search
- * @property ModuleStream    stream
- * @property ModuleSubscribe subscribe
- * @property ModuleTalk      talk
- * @property ModuleTools     tools
- * @property ModuleTopic     topic Модуль для работы с топиками
- * @property ModuleUser      user
- * @property ModuleUserfeed  userfeed
- * @property ModuleVote      vote
- * @property ModuleWall      wall
+ * @property ModuleACL         acl
+ * @property ModuleAdmin       admin
+ * @property ModuleBlog        blog
+ * @property ModuleComment     comment
+ * @property ModuleFavourite   favourite
+ * @property ModuleGeo         geo
+ * @property ModuleNotify      notify
+ * @property ModulePage        page
+ * @property ModuleSearch      search
+ * @property ModuleStream      stream
+ * @property ModuleSubscribe   subscribe
+ * @property ModuleTalk        talk
+ * @property ModuleTools       tools
+ * @property ModuleTopic       topic Модуль для работы с топиками
+ * @property ModuleUser        user
+ * @property ModuleUserfeed    userfeed
+ * @property ModuleVote        vote
+ * @property ModuleWall        wall
+ * @property ModuleCache       cache
+ * @property ModuleDatabase    database
+ * @property ModuleHook        hook
+ * @property ModuleImage       image
+ * @property ModuleImg         img
+ * @property ModuleLang        lang
+ * @property ModuleLess        less
+ * @property ModuleLogger      logger
+ * @property ModuleMail        mail
+ * @property ModuleMessage     message
+ * @property ModulePlugin      plugin
+ * @property ModuleRequest     request
+ * @property ModuleSecurity    security
+ * @property ModuleSession     session
+ * @property ModuleSkin        skin
+ * @property ModuleText        text
+ * @property ModuleValidate    validate
+ * @property ModuleViewer      viewer   Модуль обработки шаблонов используя шаблонизатор Smarty
+ * @property ModuleViewerAsset viewerAssert
+ * @property ModuleWidget      widget
+ *
  */
-class modules {
+class Modules {
     private $sPluginName = "";
 
     public function __construct($sPluginName = "") {
@@ -48,7 +68,7 @@ class modules {
 /**
  * Class, обеспечивающий взаимодействие с методами плагина
  */
-class plugins {
+class Plugins {
     private $modules;
 
     public function __get($sName) {
@@ -60,20 +80,21 @@ class plugins {
 /**
  * Класс проксирования методов
  */
-class Proxy extends E {
-    public $modules;
+class Proxy extends LsObject {
+    /**
+     * Предоставляет доступ к модулям CMS
+     * @return Modules modules
+     */
+    final public static function modules() {
+        return new Modules();
+    }
 
-    public $plugins;
-
-    public function __construct() {
-        $this->modules = new modules();
-        $this->plugins = new plugins();
+    /**
+     * Предоставляет доступ к модулям плагина CMS
+     * @return Plugins
+     */
+    final public static function plugins() {
+        return new Plugins();
     }
 }
 
-/**
- * Алиас класса проксирования методов
- */
-class P extends Proxy {
-
-}

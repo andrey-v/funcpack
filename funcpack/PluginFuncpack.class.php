@@ -20,16 +20,16 @@ if (!class_exists('Plugin')) {
 class PluginFuncpack extends Plugin {
 
     /** @var array $aDelegates Объявление делегирований */
-    protected $aDelegates = array(
-        'template' => array(),
-    );
+    protected $aDelegates = [
+        'template' => [],
+    ];
 
     /** @var array $aInherits Объявление переопределений (модули, мапперы и сущности) */
-    protected $aInherits = array(
-        'actions' => array(),
-        'modules' => array(),
-        'entity'  => array(),
-    );
+    protected $aInherits = [
+        'actions' => [],
+        'modules' => [],
+        'entity'  => [],
+    ];
 
     /**
      * Активация плагина
@@ -54,9 +54,15 @@ class PluginFuncpack extends Plugin {
      * Инициализация плагина
      */
     public function Init() {
-        $this->Viewer_Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
-        $this->Viewer_AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
-        $this->Viewer_AppendScript(Plugin::GetTemplatePath(__CLASS__) . "js/script.js"); // Добавление JS
+        P::validate([
+            ['boolean', 'value' => TRUE],
+            ['url', 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => true],
+
+        ]);
+
+        P::modules()->viewer->Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
+        P::modules()->viewer->AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
+        P::modules()->viewer->AppendScript(Plugin::GetTemplatePath(__CLASS__) . "js/script.js"); // Добавление JS
     }
 
 }
