@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>
+        <lang name="default">FuncPack for Livestreet and Alto</lang>
+    </name>
+    <author>
+        <lang name="default">andreyv</lang>
+    </author>
+    <homepage>http://gladcode.ru</homepage>
+    <version>ProblemPony RC 1</version>
+    <requires>
+        <livestreet>1.0.3</livestreet>
+        <alto>
+            <version>0.8</version>
+        </alto>
+        <system>
+            <php>5.4.0</php>
+        </system>
+    </requires>
+    <description>
+        <lang name="default">Набор функционала для разработчиков. Доставляет немного сахара к рутинной работе.</lang>
+    </description>
+</plugin>
