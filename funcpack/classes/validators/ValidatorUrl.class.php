@@ -82,7 +82,7 @@ class ValidatorUrl extends Validator implements IValidator {
                 return TRUE;
         }
 
-        P::modules()->message->AddErrorSingle($this->getMessage(), P::modules()->lang->Get('error'));
+        $this->addError();
         return FALSE;
     }
 

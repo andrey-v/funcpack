@@ -67,10 +67,10 @@ abstract class Validator {
     }
 
     /**
-     * Метод, выполняемый перед валидацией значения
-     * @return void
+     * Добавление ошибки
      */
-    protected function beforeValidate() {
-
+    protected function addError() {
+        P::modules()->message->AddErrorSingle($this->getMessage(), P::modules()->lang->Get('error'));
     }
+
 }

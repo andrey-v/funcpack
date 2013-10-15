@@ -88,7 +88,7 @@ class ValidatorBoolean extends Validator implements IValidator {
         if (!$this->bStrict && $this->xValue != $this->xTrueValue && $this->xValue != $this->xFalseValue
             || $this->bStrict && $this->xValue !== $this->xTrueValue && $this->xValue !== $this->xFalseValue
         ) {
-            P::modules()->message->AddErrorSingle($this->getMessage(), P::modules()->lang->Get('error'));
+            $this->addError();
             return FALSE;
         }
 

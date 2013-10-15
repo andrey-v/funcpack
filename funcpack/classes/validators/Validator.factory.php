@@ -17,6 +17,8 @@ class FactoryValidator {
         'bool'    => 'ValidatorBoolean',
         'boolean' => 'ValidatorBoolean',
         'url'     => 'ValidatorUrl',
+        'compare' => 'ValidatorCompare',
+        'date'    => 'ValidatorDate',
     ];
     /**
      * Текущий экземпляр главного класса валидаторов.

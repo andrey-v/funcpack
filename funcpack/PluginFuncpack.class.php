@@ -56,7 +56,9 @@ class PluginFuncpack extends Plugin {
     public function Init() {
         P::validate([
             ['boolean', 'value' => TRUE],
-            ['url', 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => true],
+            ['url', 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
+            ['compare', 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
+            ['date', 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '16.10.2013', 'operation' => '<='],
 
         ]);
 
