@@ -37,5 +37,7 @@ return array(
     'validator_date_default'           => 'Ошибочное значение оператора %%sOperator%%',
     'validator_date_format'            => 'Формат даты %%xValue%% ошибочен. Формат должен быть такой: "%%sFormat%%"',
     'validator_date_format_required'   => 'Формат требуемой даты %%xValue%% ошибочен. Формат должен быть такой: "%%sFormat%%"',
+
+    'validator_type_default'           => 'Тип значения "%%xValue%%" не соответствует типу "%%sType%%"',
     ''                                 => '',
 );
