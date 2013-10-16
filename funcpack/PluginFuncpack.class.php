@@ -55,11 +55,25 @@ class PluginFuncpack extends Plugin {
      */
     public function Init() {
         P::validate([
-            ['boolean', 'value' => TRUE],
-            ['url', 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
-            ['compare', 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
-            ['date', 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '16.10.2013', 'operation' => '<='],
-
+            /*  1 */ [FV::BASE_BOOL, 'value' => TRUE],
+            /*  2 */ [FV::BASE_URL, 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
+            /*  3 */ [FV::BASE_COMPARE, 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
+            /*  4 */ [FV::BASE_DATE, 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '16.10.2013', 'operation' => '<='],
+            /*  5 */ [FV::BASE_TYPE, 'value' => '12:59', 'type' => 'time'],
+            /*  6 */
+            /*  7 */
+            /*  8 */
+            /*  9 */
+            /* 11 */
+            /* 12 */
+            /* 13 */
+            /* 14 */
+            /* 15 */
+            /* 16 */
+            /* 17 */
+            /* 18 */
+            /* 19 */
+            /* 20 */
         ]);
 
         P::modules()->viewer->Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
