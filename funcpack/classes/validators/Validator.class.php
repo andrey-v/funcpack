@@ -37,6 +37,11 @@ abstract class Validator {
      * @var array
      */
     protected $_aModifier = [];
+    /**
+     * Код ошибки
+     * @var null|int
+     */
+    protected $iErrorCode = NULL;
 
     /**
      * Геттер для текста сообщения

@@ -23,7 +23,6 @@ class PluginFuncpack extends Plugin {
     protected $aDelegates = [
         'template' => [],
     ];
-
     /** @var array $aInherits Объявление переопределений (модули, мапперы и сущности) */
     protected $aInherits = [
         'actions' => [],
@@ -55,15 +54,16 @@ class PluginFuncpack extends Plugin {
      */
     public function Init() {
         P::validate([
-            /*  1 */ [FV::BASE_BOOL, 'value' => TRUE],
-            /*  2 */ [FV::BASE_URL, 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
-            /*  3 */ [FV::BASE_COMPARE, 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
-            /*  4 */ [FV::BASE_DATE, 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '16.10.2013', 'operation' => '<='],
-            /*  5 */ [FV::BASE_TYPE, 'value' => '12:59', 'type' => 'time'],
-            /*  6 */
-            /*  7 */
-            /*  8 */
+            /*  1 */    [FV::BASE_BOOL, 'value' => TRUE],
+            /*  2 */    [FV::BASE_URL, 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
+            /*  3 */    [FV::BASE_COMPARE, 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
+            /*  4 */    [FV::BASE_DATE, 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '19.10.2013', 'operation' => '<='],
+            /*  5 */    [FV::BASE_TYPE, 'value' => '12:59', 'type' => 'time'],
+            /*  6 */    [FV::BASE_STRING, 'value' => 'hello', 'max' => 5, 'min' => 2],
+            /*  7 */    [FV::BASE_NUMBER, 'value' => 5, 'min' => 3],
+            /*  8 */    [FV::BASE_EMAIL, 'value' => 'andreyv@gladcode.ru', 'mx' => TRUE, 'idn' => TRUE, 'empty' => FALSE],
             /*  9 */
+            /* 10 */
             /* 11 */
             /* 12 */
             /* 13 */
@@ -73,8 +73,8 @@ class PluginFuncpack extends Plugin {
             /* 17 */
             /* 18 */
             /* 19 */
-            /* 20 */
         ]);
+
 
         P::modules()->viewer->Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
         P::modules()->viewer->AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
