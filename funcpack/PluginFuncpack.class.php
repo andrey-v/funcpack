@@ -62,7 +62,7 @@ class PluginFuncpack extends Plugin {
             /*  6 */    [FV::BASE_STRING, 'value' => 'hello', 'max' => 5, 'min' => 2],
             /*  7 */    [FV::BASE_NUMBER, 'value' => 5, 'min' => 3],
             /*  8 */    [FV::BASE_EMAIL, 'value' => 'andreyv@gladcode.ru', 'mx' => TRUE, 'idn' => TRUE, 'empty' => FALSE],
-            /*  9 */
+            /*  9 */    [FV::BASE_RANGE, 'value' => 5, 'range' => [1, 2, '5', 4, 5], 'not' => FALSE, 'strict' => TRUE, 'empty' => FALSE],
             /* 10 */
             /* 11 */
             /* 12 */

@@ -113,7 +113,6 @@ class ValidatorNumber extends Validator implements IValidator {
             default :
                 return $this->sMessage = P::modules()->lang->Get('plugin.funcpack.validator_number_default', $aMsqParams);
         }
-
     }
 
     /**

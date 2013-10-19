@@ -1,110 +1,135 @@
 <?php
 /**
- * CRangeValidator class file.
+ * Файл валидатора ValidatorRange
+ * ValidatorRange проверяет вхождение значения в список допустимых значений.
+ * <br><br>
+ * Для валидатора определены следующие модификаторы:
+ * <ul>
+ *      <li><b>range</b>: Массив допустимых значений</li>
+ *      <li><b>strict</b>: Строгая проверка. В случае Истины проверяется тип и значение. По умолчанию FALSE</li>
+ *      <li><b>empty</b>: разрешать ли пустые значения (по умолчанию TRUE)</li>
+ *      <li><b>not</b>: Инвертор логики проверки. в случае значения TRUE проверка осуществляется на НЕ вхождение в запрещенный список. </li>
+ *      <li><b>message</b>: сообщение, которое будет вызвано при ошибке валидации, если не указано, то выведется сообщение по
+ *      умолчанию</li>
+ *      <li><b>value</b>: проверяемое число.</li>
+ *</ul>
  *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @link http://www.yiiframework.com/
- * @copyright 2008-2013 Yii Software LLC
- * @license http://www.yiiframework.com/license/
- */
-
-/**
- * CRangeValidator validates that the attribute value is among the list (specified via {@link range}).
- * You may invert the validation logic with help of the {@link not} property (available since 1.1.5).
+ * @author      Андрей Г. Воронов <andreyv@gladcode.ru>
+ * @copyright   Copyright © 2013, Андрей Г. Воронов
+ *              Является частью плагина funcPack
+ * @copyright   Copyright © 2008-2013 Yii Software LLC
+ *              Используется программный код фреймворка Yii (http://www.yiiframework.com/),
+ *              распространяемый по лицензии http://www.yiiframework.com/license/
  *
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @package system.validators
- * @since 1.0
+ * @version     ProblemPony RC 1 от 19.10.13 00:39
  */
-class ValidatorRange extends CValidator
-{
-	/**
-	 * @var array list of valid values that the attribute value should be among
-	 */
-	public $range;
-	/**
-	 * @var boolean whether the comparison is strict (both type and value must be the same)
-	 */
-	public $strict=false;
-	/**
-	 * @var boolean whether the attribute value can be null or empty. Defaults to true,
-	 * meaning that if the attribute is empty, it is considered valid.
-	 */
-	public $allowEmpty=true;
-	/**
-	 * @var boolean whether to invert the validation logic. Defaults to false. If set to true,
-	 * the attribute value should NOT be among the list of values defined via {@link range}.
-	 * @since 1.1.5
-	 **/
- 	public $not=false;
+class ValidatorRange extends Validator implements IValidator {
+    /**
+     * Массив допустимых значений
+     * @var array
+     */
+    public $aRange;
+    /**
+     * Строгая проверка. В случае Истины проверяется тип и значение. По умолчанию FALSE
+     * @var bool
+     */
+    public $bStrict = FALSE;
+    /**
+     * Разрешать ли пустое значение. Если значение пустое, и это свойство ИСТИНА - то значение будет валидным. По
+     * умолчанию FALSE
+     * @var bool
+     */
+    public $bAllowEmpty = FALSE;
+    /**
+     * Инвертор логики проверки. в случае значения TRUE проверка осуществляется на НЕ вхождение в запрещенный список.
+     * @var boolean
+     **/
+    public $bNot = FALSE;
+    /**
+     * Массив модификаторов и соответствий их свойствам объекта
+     * @var array
+     */
+    protected $_aModifier = [
+        'range'  => 'aRange',
+        'strict' => 'bStrict',
+        'empty'  => 'bAllowEmpty',
+        'not'    => 'bNot',
+    ];
 
-	/**
-	 * Validates the attribute of the object.
-	 * If there is any error, the error message is added to the object.
-	 * @param CModel $object the object being validated
-	 * @param string $attribute the attribute being validated
-	 * @throws CException if given {@link range} is not an array
-	 */
-	protected function validateAttribute($object,$attribute)
-	{
-		$value=$object->$attribute;
-		if($this->allowEmpty && $this->isEmpty($value))
-			return;
-		if(!is_array($this->range))
-			throw new CException(Yii::t('yii','The "range" property must be specified with a list of values.'));
-		$result = false;
-		if($this->strict)
-			$result=in_array($value,$this->range,true);
-		else
-		{
-			foreach($this->range as $r)
-			{
-				$result=(strcmp($r,$value)===0);
-				if($result)
-					break;
-			}
-		}
-		if(!$this->not && !$result)
-		{
-			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} is not in the list.');
-			$this->addError($object,$attribute,$message);
-		}
-		elseif($this->not && $result)
-		{
-			$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} is in the list.');
-			$this->addError($object,$attribute,$message);
-		}
-	}
+    /**
+     * Спиок значений ошибочный
+     */
+    const ERROR_CODE_RANGE = 0;
+    /**
+     * Значение не в списке
+     */
+    const ERROR_CODE_NOT_IN_RANGE = 1;
+    /**
+     * Значение в списке
+     */
+    const ERROR_CODE_IN_RANGE = 2;
 
-	/**
-	 * Returns the JavaScript needed for performing client-side validation.
-	 * @param CModel $object the data object being validated
-	 * @param string $attribute the name of the attribute to be validated.
-	 * @throws CException if given {@link range} is not an array
-	 * @return string the client-side validation script.
-	 * @see CActiveForm::enableClientValidation
-	 * @since 1.1.7
-	 */
-	public function clientValidateAttribute($object,$attribute)
-	{
-		if(!is_array($this->range))
-			throw new CException(Yii::t('yii','The "range" property must be specified with a list of values.'));
+    /**
+     * Получим дефолтное сообщение об ошибке
+     */
+    final public function getMessage() {
+        if ($this->sMessage)
+            return $this->sMessage;
 
-		if(($message=$this->message)===null)
-			$message=$this->not ? Yii::t('yii','{attribute} is in the list.') : Yii::t('yii','{attribute} is not in the list.');
-		$message=strtr($message,array(
-			'{attribute}'=>$object->getAttributeLabel($attribute),
-		));
+        /** @var array $aMsqParams Массив параметров, передаваемый в текстовку */
+        $aMsqParams = [
+            'xValue' => $this->xValue,
+        ];
 
-		$range=array();
-		foreach($this->range as $value)
-			$range[]=(string)$value;
-		$range=CJSON::encode($range);
+        switch ($this->iErrorCode) {
+            case self::ERROR_CODE_RANGE:
+                return $this->sMessage = P::modules()->lang->Get('plugin.funcpack.validator_range_range', $aMsqParams);
+            case self::ERROR_CODE_NOT_IN_RANGE:
+                return $this->sMessage = P::modules()->lang->Get('plugin.funcpack.validator_range_not_in', $aMsqParams);
+            case self::ERROR_CODE_IN_RANGE:
+                return $this->sMessage = P::modules()->lang->Get('plugin.funcpack.validator_range_in', $aMsqParams);
+            default :
+                return $this->sMessage = P::modules()->lang->Get('plugin.funcpack.validator_range_default', $aMsqParams);
+        }
+    }
 
-		return "
-if(".($this->allowEmpty ? "jQuery.trim(value)!='' && " : '').($this->not ? "jQuery.inArray(value, $range)>=0" : "jQuery.inArray(value, $range)<0").") {
-	messages.push(".CJSON::encode($message).");
-}
-";
-	}
+    /**
+     * Проверка текущего значения
+     * @return bool
+     * @throws Exception
+     */
+    public function validate() {
+        if ($this->bAllowEmpty && $this->isEmpty($this->xValue))
+            return TRUE;
+
+        if (!is_array($this->aRange)) {
+            $this->iErrorCode = self::ERROR_CODE_RANGE;
+            $bResult = FALSE;
+        } else {
+            $bResult = FALSE;
+            if ($this->bStrict)
+                $bResult = in_array($this->xValue, $this->aRange, TRUE);
+            else {
+                foreach ($this->aRange as $r) {
+                    $bResult = (strcmp($r, $this->xValue) === 0);
+                    if ($bResult)
+                        break;
+                }
+            }
+            if (!$this->bNot && !$bResult) {
+                $this->iErrorCode = self::ERROR_CODE_NOT_IN_RANGE;
+            } elseif ($this->bNot && $bResult) {
+                $this->iErrorCode = self::ERROR_CODE_IN_RANGE;
+                $bResult = FALSE;
+            }
+        }
+
+        if (!$bResult) {
+            $this->addError();
+            return FALSE;
+        }
+        return TRUE;
+
+    }
+
 }

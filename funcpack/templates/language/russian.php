@@ -65,7 +65,11 @@ return array(
     'validator_email_mx'               => 'Не найдена MX запись указанного адреса',
     'validator_email_default'          => 'Ошибка проверки адреса электронной почты',
 
-
+    // ValidatorRange
+    'validator_range_range'            => 'Список значений ошибочен!',
+    'validator_range_not_in'           => 'Указанное значение "%%xValue%%" не содержиться в списке разрешенных значений.',
+    'validator_range_in'               => 'Указанное значение "%%xValue%%" содержиться в списке запрещенных значений.',
+    'validator_range_default'          => 'Ошибка проверки значения',
     ''                                 => '',
 
 
