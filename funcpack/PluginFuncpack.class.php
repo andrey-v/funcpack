@@ -55,7 +55,7 @@ class PluginFuncpack extends Plugin {
     public function Init() {
         P::validate([
             /*  1 */    [FV::BASE_BOOL, 'value' => TRUE],
-            /*  2 */    [FV::BASE_URL, 'value' => 'http://кто.рф/', 'validSchemes' => array('http'), 'validateIDN' => TRUE],
+            /*  2 */    [FV::BASE_URL, 'value' => 'http://кто.рф/', 'scheme' => array('http', 'https'), 'idn' => TRUE],
             /*  3 */    [FV::BASE_COMPARE, 'value' => '', 'operator' => '==', 'required' => '10', 'empty' => TRUE, 'strict' => FALSE],
             /*  4 */    [FV::BASE_DATE, 'value' => date('d.m.Y'), 'format'=>'dd.MM.yyyy', 'required' => '19.10.2013', 'operation' => '<='],
             /*  5 */    [FV::BASE_TYPE, 'value' => '12:59', 'type' => 'time'],

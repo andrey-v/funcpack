@@ -7,8 +7,8 @@
  * будет выведено методом AddErrorSingle модуля {@link Message}.
  * Для валидатора используются следующие модификаторы:
  * <ul>
- * <li><b>validSchemes</b>: массив валидных схем URI (по умолчанию ['http', 'https'])</li>
- * <li><b>validateIDN</b>: Проверять ли домены представленные как IDN (internationalized domain names), ели ложь, то
+ * <li><b>scheme</b>: массив валидных схем URI (по умолчанию ['http', 'https'])</li>
+ * <li><b>idn</b>: Проверять ли домены представленные как IDN (internationalized domain names), ели ложь, то
  * IDN домены всегда будут невалидными при проверке (по умолчанию FALSE)</li>
  * <li><b>empty</b>: разрешать ли пустые значения (по умолчанию TRUE)</li>
  * <li><b>message</b>: сообщение, которое будет вызвано при ошибке валидации, если не указано, то выведется сообщение по
@@ -58,9 +58,9 @@ class ValidatorUrl extends Validator implements IValidator {
      * @var array
      */
     protected $_aModifier = [
-        'validSchemes'  => 'aValidScheme',
-        'validateIDN'   => 'bValidateIDN',
-        'empty'         => 'bAllowEmpty',
+        'scheme' => 'aValidScheme',
+        'idn'    => 'bValidateIDN',
+        'empty'  => 'bAllowEmpty',
     ];
 
     /**
