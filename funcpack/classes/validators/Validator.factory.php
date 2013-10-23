@@ -6,7 +6,7 @@
  * @copyright   Copyright © 2013, Андрей Г. Воронов
  *              Является частью плагина funcPack
  *
- * @version     ProblemPony RC 1 от 11.10.13 20:04
+ * @version     ProblemCode RC 1 от 11.10.13 20:04
  */
 class FactoryValidator {
 

@@ -23,7 +23,7 @@
  *              Используется программный код фреймворка Yii (http://www.yiiframework.com/),
  *              распространяемый по лицензии http://www.yiiframework.com/license/
  *
- * @version     ProblemPony RC 1 от 12.10.13 01:06
+ * @version     ProblemCode RC 1 от 12.10.13 01:06
  */
 class ValidatorUrl extends Validator implements IValidator {
     /**

@@ -11,7 +11,7 @@
  *
  * @method Validator validate
  *
- * @version     ProblemPony RC 1 от 11.10.13 20:04
+ * @version     ProblemCode RC 1 от 11.10.13 20:04
  */
 abstract class Validator {
     /**

@@ -6,11 +6,11 @@
  * @copyrights  Copyright © 2013, Андрей Г. Воронов
  *              Является частью плагина funcPack
  *
- * @version     ProblemPony RC 1 от 05.10.13 01:37
+ * @version     ProblemCode RC 1 от 05.10.13 01:37
  */
 return array(
     // Описание ядра пакета
-    'core_version_name'                => 'ProblemPony RC 1',
+    'core_version_name'                => 'ProblemCode RC 1',
     'core_version_date'                => '12 октября 2013 года',
     '',
 

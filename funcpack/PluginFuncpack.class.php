@@ -15,9 +15,11 @@ if (!class_exists('Plugin')) {
  * @method void Viewer_AppendScript
  * @method void Viewer_Assign
  *
- * @version     ProblemPony RC 1 от 05.10.13 01:33
+ * @version     ProblemCode RC 1 от 05.10.13 01:33
  */
 class PluginFuncpack extends Plugin {
+
+    use AdvancedPlugin;
 
     /** @var array $aDelegates Объявление делегирований */
     protected $aDelegates = [
@@ -63,22 +65,14 @@ class PluginFuncpack extends Plugin {
             /*  7 */    [FV::BASE_NUMBER, 'value' => 5, 'min' => 3],
             /*  8 */    [FV::BASE_EMAIL, 'value' => 'andreyv@gladcode.ru', 'mx' => TRUE, 'idn' => TRUE, 'empty' => FALSE],
             /*  9 */    [FV::BASE_RANGE, 'value' => 5, 'range' => [1, 2, '5', 4, 5], 'not' => FALSE, 'strict' => TRUE, 'empty' => FALSE],
-            /* 10 */
-            /* 11 */
-            /* 12 */
-            /* 13 */
-            /* 14 */
-            /* 15 */
-            /* 16 */
-            /* 17 */
-            /* 18 */
-            /* 19 */
         ]);
 
 
         P::modules()->viewer->Assign("sTemplatePath", Plugin::GetTemplatePath(__CLASS__));
-        P::modules()->viewer->AppendStyle(Plugin::GetTemplatePath(__CLASS__) . "css/style.css"); // Добавление CSS
-        P::modules()->viewer->AppendScript(Plugin::GetTemplatePath(__CLASS__) . "js/script.js"); // Добавление JS
+
+        // Используем примесь
+        $this->initScripts();
+
     }
 
 }
