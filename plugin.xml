@@ -7,7 +7,7 @@
         <lang name="default">andreyv</lang>
     </author>
     <homepage>http://gladcode.ru</homepage>
-    <version>ProblemCode RC 1</version>
+    <version>ProblemCode RC 2</version>
     <requires>
         <livestreet>1.0.3</livestreet>
         <alto>
