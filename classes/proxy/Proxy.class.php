@@ -50,7 +50,7 @@
  * @property ModuleViewer      viewer   Модуль обработки шаблонов используя шаблонизатор Smarty
  * @property ModuleViewerAsset viewerAssert
  * @property ModuleWidget      widget
- *
+ * @property ModuleUploader    uploader
  */
 class Modules {
     private $sPluginName = "";
@@ -60,6 +60,7 @@ class Modules {
     }
 
     public function __get($sName) {
+        Config::ResetLevel(Config::LEVEL_APP);
         return Engine::getInstance()->getModule(
             (($this->sPluginName == 'Plugin_') ? '' : $this->sPluginName) . ucwords($sName) . '_')[0];
     }
@@ -67,12 +68,17 @@ class Modules {
 
 /**
  * Class, обеспечивающий взаимодействие с методами плагина
+ * @property UserLogo userlogo
+ * @property Status status
  */
 class Plugins {
-    private $modules;
+    /**
+     * @var Modules
+     */
+    public $modules;
 
     public function __get($sName) {
-        $this->modules = new modules($sName);
+        $this->modules = new Modules($sName);
         return $this;
     }
 }
@@ -96,5 +102,6 @@ class Proxy extends LsObject {
     final public static function plugins() {
         return new Plugins();
     }
+
 }
 
