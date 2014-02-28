@@ -60,7 +60,7 @@ class Modules {
     }
 
     public function __get($sName) {
-        Config::ResetLevel(Config::LEVEL_APP);
+//        Config::ResetLevel(Config::LEVEL_APP);
         return Engine::getInstance()->getModule(
             (($this->sPluginName == 'Plugin_') ? '' : $this->sPluginName) . ucwords($sName) . '_')[0];
     }

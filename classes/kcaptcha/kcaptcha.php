@@ -16,6 +16,11 @@
 
 # See kcaptcha_config.php for customization
 
+# @copyright   Copyright © 2008-2013 Yii Software LLC
+#              Используется программный код фреймворка Yii (http://www.yiiframework.com/),
+#              распространяемый по лицензии http://www.yiiframework.com/license/
+
+
 class KCAPTCHA{
 
 	// generates keystring and image

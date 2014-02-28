@@ -16,6 +16,15 @@ class FuncpackLoader extends LsObject {
 
         /** Подключим основной класс хелпера */
         include_once dirname(__FILE__) . '/../classes/p/P.class.php';
+//
+//        /** Подключение примесей */
+//        include_once dirname(__FILE__) . '/../classes/traits/AdvancedHook.trait.php';
+////        include_once dirname(__FILE__) . '/../classes/traits/AdvancedPlugin.trait.php';
+//
+//        /** Подключим валидаторы */
+//        include_once dirname(__FILE__) . '/../classes/validators/Validator.interface.php';
+//        include_once dirname(__FILE__) . '/../classes/validators/Validator.factory.php';
+//        include_once dirname(__FILE__) . '/../classes/validators/Validator.class.php';
 
         /** Подключение примесей */
         include_once dirname(__FILE__) . '/../classes/traits/AdvancedPlugin.trait.php';

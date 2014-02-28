@@ -15,7 +15,7 @@ if (!class_exists('Plugin')) {
  * @method void Viewer_AppendScript
  * @method void Viewer_Assign
  *
- * @version     ProblemCode RC 1 от 05.10.13 01:33
+ * @version     ProblemCode RC 2 от 05.10.13 01:33
  */
 class PluginFuncpack extends Plugin {
 
@@ -41,7 +41,7 @@ class PluginFuncpack extends Plugin {
      */
     public function Activate() {
         if (!$this->isTableExists('prefix_funcpack_data')) {
-            $this->ExportSQL(dirname(__FILE__) . '/install.sql');
+            $this->ExportSQL(dirname(__FILE__) . '/sql/install.sql');
         }
         return TRUE;
     }
