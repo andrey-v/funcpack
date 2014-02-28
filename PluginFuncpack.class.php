@@ -31,9 +31,7 @@ class PluginFuncpack extends Plugin {
     /** @var array $aInherits Объявление переопределений (модули, мапперы и сущности) */
     protected $aInherits = [
 
-        'modules' => [
-            'ModuleLang',
-        ],
+        'modules' => [],
         'entity'  => [],
     ];
 
